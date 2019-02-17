@@ -28,21 +28,36 @@ public class Triangle extends Figure {
     }*/
     @Override
     public double area() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double area = 0;
+        double per=perimetr()/2;
+        int i1=0;
+        for(int i=0;i<vertices.size();i++){
+            
+            i1=i+1;
+            if(i==2){
+            i1=0;
+            }
+        area*=Math.sqrt(per*(per-side(vertices.get(i),vertices.get(i1))));
+        }
+        area*=per;
+        return area;
     }
 
     @Override
     public double perimetr() {
         double per = 0;
         int i1 = 0;
-        for (int i = 0; i < vertices.size() - 1; i++) {
+        for (int i = 0; i < vertices.size(); i++) {
             i1 = i + 1;
             if (i == 2) {
                 i1 = 0;
             }
-            per += Math.sqrt(Math.pow(vertices.get(i).getX(), vertices.get(i1).getX()) + Math.pow(vertices.get(i).getY(), vertices.get(i1).getY()));
-
+            per += Math.sqrt(Math.pow(vertices.get(i).getX()- vertices.get(i1).getX(),2) + Math.pow(vertices.get(i).getY()- vertices.get(i1).getY(), 2));
         }
         return per;
+    }
+    
+    private double side(Angle angle1, Angle angle2){
+        return Math.sqrt(Math.pow(angle1.getX()-angle2.getX(),2)+Math.pow(angle1.getY()-angle2.getY(), 2));
     }
 }
